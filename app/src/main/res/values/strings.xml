@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Weather App</string>
+    <string name="local_weather">Local Weather</string>
+    <string name="local">local</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="network_call_fail_toast">서버와 연결에 실패하였습니다.</string>
 </resources>
