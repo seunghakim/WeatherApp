@@ -1,4 +1,4 @@
-package com.homework.weather.ui
+package com.homework.weather.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,7 +12,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.homework.weather.AppConstants
 import com.homework.weather.R
 import com.homework.weather.databinding.ActivityMainBinding
-import com.homework.weather.model.WeatherListModel
 import com.homework.weather.ui.adapter.recycleradapter.MainWeatherRecyclerAdapter
 import com.homework.weather.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +24,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var binding: ActivityMainBinding
 
     private var adapter: MainWeatherRecyclerAdapter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         initViewModel()
         initViewModelEvent()
         requestLocationList()
-
     }
 
     private fun initUI() {
@@ -47,11 +46,11 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             rvWeather.adapter = adapter
             swipeRefresh.setOnRefreshListener(this@MainActivity)
         }
-
     }
 
     private fun initViewModel() {
         with(viewModel) {
+            //지역 위치 리스트를 받은 후 날씨데이터를 각각 받아옴
             locationList.observe(this@MainActivity, Observer {
                 it.forEach { locationModel ->
                     lifecycleScope.launch {
@@ -59,6 +58,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                     }
                 }
             })
+            //날씨 데이터를 받음과 동시에 리사이클러뷰에 데이터 세팅
             weatherListLiveData.observe(this@MainActivity, Observer {
                 //로딩바 처리
                 if (binding.pbLoading.visibility == View.VISIBLE) {
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         }
     }
 
-    private fun initViewModelEvent(){
+    private fun initViewModelEvent() {
         with(viewModel) {
             //서버 에러 처리.
             viewEvent.observe(this@MainActivity, Observer {

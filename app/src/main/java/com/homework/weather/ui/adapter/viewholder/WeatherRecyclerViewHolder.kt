@@ -9,6 +9,7 @@ import com.homework.weather.utilities.ImageUtils
 class WeatherRecyclerViewHolder(private val binding: ListItemWeatherBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun onBind(model: WeatherListModel) {
+        //모델을 데이터 바인딩에 적용
         binding.item = model
 
         val todayImage = String.format(AppConstants.IMAGE_URL,model.todayWeather.weather_state_abbr)

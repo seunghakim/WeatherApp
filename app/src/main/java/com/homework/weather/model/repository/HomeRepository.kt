@@ -1,7 +1,6 @@
 package com.homework.weather.model.repository
 
 import com.homework.weather.model.LocationModel
-import com.homework.weather.model.WeatherModel
 import com.homework.weather.model.response.ResponseWeatherData
 import com.homework.weather.network.HomeApiService
 import retrofit2.Response

@@ -17,11 +17,11 @@ class ServiceUtils private constructor() {
 
     private var retrofit: Retrofit? = null
     private fun getRetrofit(): Retrofit {
+        //response데이터 로그를 위한 Interceptor 설정
         val loggingInterceptor = HttpLoggingInterceptor { message: String? ->
             Logger.d(message)
         }
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-
 
         val httpClient = OkHttpClient().newBuilder()
                 .connectTimeout(AppConstants.HTTP_CONNECT_TIMEOUT, TimeUnit.SECONDS)

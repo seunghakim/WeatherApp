@@ -9,9 +9,9 @@ import com.orhanobut.logger.PrettyFormatStrategy
 import dagger.hilt.android.HiltAndroidApp
 
 
+//Hilt 사용을 위한 설정
 @HiltAndroidApp
 class AppApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
 
@@ -19,9 +19,7 @@ class AppApplication : Application() {
         initLogger()
     }
 
-
     private fun initLogger() {
-
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
             .showThreadInfo(false)
             .methodCount(0)
